@@ -1,0 +1,31 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: job-application
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: job-application
+  template:
+    metadata:
+      labels:
+        app: job-application
+    spec:
+      containers:
+        - name: flask-app
+          image: job-application-tracker:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DATABASE_PATH
+              value: /data/job_portal.db
+          volumeMounts:
+            - name: job-application-data
+              mountPath: /data
+      volumes:
+        - name: job-application-data
+          persistentVolumeClaim:
+            claimName: job-application-pvc
