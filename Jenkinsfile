@@ -5,7 +5,6 @@ pipeline {
         githubPush()
     }
 
-
     environment {
         APP_NAME = 'job-application-tracker'
         K8S_DEPLOYMENT = 'job-application'
