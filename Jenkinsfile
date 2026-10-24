@@ -14,6 +14,7 @@ pipeline {
         KUBECONFIG = 'C:\\Users\\ANAND L\\.kube\\config'
     }
 
+
     stages {
         stage('Checkout') {
             steps {
