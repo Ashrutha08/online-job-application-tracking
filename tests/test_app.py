@@ -38,7 +38,8 @@ def register_and_login(client, email="candidate@example.com"):
 def test_homepage_loads(client):
     response = client.get("/")
     assert response.status_code == 200
-    assert b"Find your next opportunity" in response.data
+    assert b"Find your next" in response.data
+    assert b"opportunity." in response.data
 
 
 def test_jobs_page_shows_seeded_jobs(client):
