@@ -1,6 +1,9 @@
-
 pipeline {
     agent any
+
+    triggers {
+        githubPush()
+    }
 
     environment {
         APP_NAME = 'job-application-tracker'
