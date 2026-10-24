@@ -2,29 +2,33 @@
 pipeline {
     agent any
 
+    environment {
+        PYTHON = 'C:\\Users\\ANAND L\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\python.exe'
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                echo 'Source code is available in the Jenkins workspace.'
+                echo 'Source code is checked out from GitHub.'
             }
         }
 
         stage('Check Python') {
             steps {
-                bat 'python --version'
+                bat '"%PYTHON%" --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install -r requirements.txt'
-                bat 'python -m pip install pytest'
+                bat '"%PYTHON%" -m pip install -r requirements.txt'
+                bat '"%PYTHON%" -m pip install pytest'
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'python -m pytest -v'
+                bat '"%PYTHON%" -m pytest -v'
             }
         }
     }
@@ -34,7 +38,10 @@ pipeline {
             echo 'CI pipeline passed!'
         }
         failure {
-            echo 'CI pipeline failed. Check the console output.'
+            echo 'CI pipeline failed. Check the Console Output.'
+        }
+        always {
+            echo 'Jenkins pipeline execution completed.'
         }
     }
 }
