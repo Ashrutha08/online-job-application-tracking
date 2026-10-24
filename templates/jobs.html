@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Find jobs{% endblock %}
+{% block content %}
+<section class="page-heading"><span class="eyebrow">CAREER OPPORTUNITIES</span><h1>Find a role that fits.</h1><p>Search openings and take the next step in your career.</p></section>
+<form class="search-form listing-search" method="get"><input name="q" value="{{ search }}" placeholder="Search title, company, or location"><button class="button button-primary">Search</button></form>
+<div class="job-list">
+{% for job in jobs %}
+  <article class="job-row">
+    <div class="company-logo">{{ job.company[:1] }}</div>
+    <div class="job-row-main"><h3>{{ job.title }}</h3><p>{{ job.company }} <span>·</span> {{ job.location }}</p><p class="job-description">{{ job.description }}</p></div>
+    <a class="button button-outline" href="{{ url_for('apply', job_id=job.id) }}">Apply now →</a>
+  </article>
+{% else %}
+  <div class="empty-state"><h3>No matching jobs found</h3><p>Try a different keyword or clear your search.</p><a class="text-link" href="{{ url_for('jobs') }}">View all jobs</a></div>
+{% endfor %}
+</div>
+{% endblock %}

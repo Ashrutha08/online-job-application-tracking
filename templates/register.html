@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Create account{% endblock %}
+{% block content %}
+<div class="auth-layout"><div class="auth-aside"><span class="eyebrow">MAKE YOUR NEXT MOVE</span><h1>Good things start with one application.</h1><p>Create your account to save time, apply to roles, and follow your progress.</p><div class="aside-stat"><strong>One place.</strong><span>Every opportunity, organized.</span></div></div>
+<section class="auth-card"><span class="eyebrow">JOIN CAREERLAUNCH</span><h2>Create your account</h2><p class="muted">Start tracking your career journey.</p>
+<form method="post" class="form-stack">
+<label>Full name<input name="name" required autocomplete="name" placeholder="Your full name"></label>
+<label>Email address<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+<label>Password<input name="password" type="password" required minlength="8" autocomplete="new-password" placeholder="At least 8 characters"></label>
+<button class="button button-primary button-full">Create account →</button>
+</form><p class="auth-switch">Already registered? <a href="{{ url_for('login') }}">Log in</a></p></section></div>
+{% endblock %}

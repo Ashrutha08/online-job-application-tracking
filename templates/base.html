@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}CareerLaunch{% endblock %} | CareerLaunch</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">C</span> CareerLaunch</a>
+    <nav>
+      <a href="{{ url_for('jobs') }}">Find jobs</a>
+      {% if session.get('user_id') %}
+        <a href="{{ url_for('my_applications') }}">My applications</a>
+        {% if session.get('is_admin') %}<a href="{{ url_for('admin') }}">Admin</a>{% endif %}
+        <span class="welcome">Hi, {{ session.get('user_name') }}</span>
+        <a class="nav-cta" href="{{ url_for('logout') }}">Log out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Log in</a>
+        <a class="nav-cta" href="{{ url_for('register') }}">Create account</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-list">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer">CareerLaunch · Online Job Application and Tracking System · DevOps Case Study</footer>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Apply for {{ job.title }}{% endblock %}
+{% block content %}
+<section class="page-heading"><span class="eyebrow">TAKE THE NEXT STEP</span><h1>Apply for this role.</h1><p>Tell the team why you're a great fit.</p></section>
+<div class="apply-layout"><article class="job-card apply-summary"><div class="company-logo">{{ job.company[:1] }}</div><span class="job-location">{{ job.location }}</span><h2>{{ job.title }}</h2><p class="company-name">{{ job.company }}</p><p class="job-description">{{ job.description }}</p></article>
+<section class="auth-card apply-form"><h2>Your application</h2><p class="muted">A short, thoughtful note is a great start.</p><form method="post" class="form-stack"><label>Cover letter<textarea name="cover_letter" rows="8" required minlength="20" placeholder="Share your interest and relevant skills (at least 20 characters)..."></textarea></label><button class="button button-primary button-full">Submit application →</button></form><p class="muted small">You can track the status from My applications after submitting.</p></section></div>
+{% endblock %}

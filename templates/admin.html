@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Admin dashboard{% endblock %}
+{% block content %}
+<section class="page-heading"><span class="eyebrow">PORTAL ADMINISTRATION</span><h1>Application dashboard</h1><p>Review candidate applications and update their status.</p></section>
+{% if applications %}
+<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Candidate</th><th>Role</th><th>Submitted</th><th>Status</th><th>Update</th></tr></thead><tbody>
+{% for item in applications %}<tr><td><strong>{{ item.applicant_name }}</strong><small>{{ item.applicant_email }}</small></td><td>{{ item.title }}<small>{{ item.company }}</small></td><td>{{ item.applied_at }}</td><td><span class="status">{{ item.status }}</span></td><td><form method="post" class="status-form"><input type="hidden" name="application_id" value="{{ item.id }}"><select name="status" aria-label="Application status"><option {% if item.status == 'Applied' %}selected{% endif %}>Applied</option><option {% if item.status == 'Under Review' %}selected{% endif %}>Under Review</option><option {% if item.status == 'Shortlisted' %}selected{% endif %}>Shortlisted</option><option {% if item.status == 'Rejected' %}selected{% endif %}>Rejected</option><option {% if item.status == 'Hired' %}selected{% endif %}>Hired</option></select><button class="button button-primary button-small">Save</button></form></td></tr>{% endfor %}
+</tbody></table></div>
+{% else %}<div class="empty-state"><h2>No applications yet</h2><p>Submitted applications will appear here.</p></div>{% endif %}
+{% endblock %}

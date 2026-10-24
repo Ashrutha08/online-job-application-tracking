@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}My applications{% endblock %}
+{% block content %}
+<section class="page-heading"><span class="eyebrow">YOUR CAREER DASHBOARD</span><h1>My applications</h1><p>Keep an eye on every opportunity you've applied for.</p></section>
+{% if applications %}
+<div class="application-list">
+{% for item in applications %}
+<article class="application-card"><div class="company-logo">{{ item.company[:1] }}</div><div class="application-main"><h3>{{ item.title }}</h3><p>{{ item.company }} · {{ item.location }}</p><small>Applied {{ item.applied_at }}</small></div><span class="status status-{{ item.status|lower|replace(' ', '-') }}">{{ item.status }}</span></article>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty-state"><div class="empty-icon">↗</div><h2>Your next step starts here.</h2><p>You haven't applied to any jobs yet. Explore openings and submit your first application.</p><a class="button button-primary" href="{{ url_for('jobs') }}">Explore jobs →</a></div>
+{% endif %}
+{% endblock %}
