@@ -3,13 +3,13 @@ pipeline {
     agent any
 
     environment {
-        PYTHON = 'C:\\Users\\ANAND L\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\python.exe'
+        PYTHON = 'C:\\Users\\ANAND L\\AppData\\Local\\Programs\\Python\\Python310\\python.exe'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                echo 'Source code is checked out from GitHub.'
+                echo 'Source code checked out from GitHub.'
             }
         }
 
@@ -21,6 +21,7 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
+                bat '"%PYTHON%" -m pip install --upgrade pip'
                 bat '"%PYTHON%" -m pip install -r requirements.txt'
                 bat '"%PYTHON%" -m pip install pytest'
             }
@@ -35,10 +36,10 @@ pipeline {
 
     post {
         success {
-            echo 'CI pipeline passed!'
+            echo 'SUCCESS: All CI pipeline stages completed.'
         }
         failure {
-            echo 'CI pipeline failed. Check the Console Output.'
+            echo 'FAILURE: Check the Console Output for details.'
         }
         always {
             echo 'Jenkins pipeline execution completed.'
