@@ -11,6 +11,7 @@ pipeline {
         K8S_CONTAINER = 'flask-app'
         K8S_NAMESPACE = 'default'
         PYTHON = 'C:\\Users\\ANAND L\\AppData\\Local\\Programs\\Python\\Python310\\python.exe'
+        KUBECONFIG = 'C:\\Users\\ANAND L\\.kube\\config'
     }
 
     stages {
@@ -24,7 +25,7 @@ pipeline {
             steps {
                 bat 'docker version'
                 bat 'kubectl config current-context'
-                bat 'kubectl cluster-info'
+                bat 'kubectl get nodes'
                 bat '"%PYTHON%" --version'
             }
         }
